@@ -1,0 +1,8 @@
+---
+dataset:audience:
+  type: sql
+  name: Audience
+  query: Select * from Users
+  description:
+  icon:
+  connection: data_warehouse:redshift-1
