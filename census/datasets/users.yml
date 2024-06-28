@@ -1,7 +1,7 @@
 ---
 dataset:users:
   type: sql
-  name: Users
+  name: Redshift Users
   query: Select * from Users
   description:
   icon:
