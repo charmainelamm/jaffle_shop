@@ -1,0 +1,55 @@
+---
+sync:redshift-redshift-with-array-column-googlesheets-connection-main:
+  paused: false
+  behavior:
+    operation: mirror
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: true
+      mode: add_only
+    name_normalization: match_source_names
+    order_by: alphabetical_column_name
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: destination:google-sheets
+    object_identifier: '{"spreadsheet_id":"1Vg42sYlQf1ga9P8_KrNQMYQnsbeTlrKkTCv_CjdgMBo","sheet_id":0}'
+  source:
+    type: dataset
+    connection_identifier: data_warehouse:redshift
+    object_identifier: dataset:redshift-with-array-column
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: array_column
+    to:
+      field_name: array_column
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: id
+    to:
+      field_name: id
+    field_type: Double
+    follow_source_type: true
+    generate_field: true
+  advanced_configuration:
+    input_value_mode: true
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75

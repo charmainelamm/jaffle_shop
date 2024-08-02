@@ -1,0 +1,38 @@
+---
+dataset:audience-membership:
+  type: sql
+  name: Audience Membership
+  query: |-
+    Select 1 as id
+    , 'Gondor' as name
+    , 'gondor@example.com' as email
+    , 'example.com' as domain
+    , null time
+    -- union ALL
+    -- select 2 as id
+    -- , 'Rivendell' as name
+    -- , 'rivendell@example.com' as email
+    -- , 'example.com' as domain
+    -- union ALL
+    -- select 3 as id
+    -- , 'Woodland Realm'
+    -- , 'woodland@example.com' as email
+    -- , 'example.com' as domain
+    -- union all
+    -- select 4 as id
+    -- , 'Rohan' as name
+    -- , 'rohan@example.com' as email
+    -- , 'example.com' as domain
+    -- UNION ALL
+    -- select 5 as id
+    -- , 'Numenor' as name
+    -- , 'numenor@example.com' as email
+    -- , 'example.com' as domain
+    -- UNION ALL
+    -- select 6 as id
+    -- , 'Dale' as name
+    -- , 'dale@example.com' as email
+    -- , 'example.com' as domain
+  description:
+  icon: "emoji:\U0001F649"
+  connection: data_warehouse:bigquery

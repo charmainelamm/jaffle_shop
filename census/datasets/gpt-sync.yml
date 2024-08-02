@@ -1,0 +1,10 @@
+---
+dataset:gpt-sync:
+  type: sql
+  name: 'gpt sync! '
+  query: 'Select * from census.computed_from_gpt_for_dataset_users_and_column_mayhaps_this_will_work_part_4_in_workspace_1
+
+    '
+  description:
+  icon:
+  connection: data_warehouse:redshift

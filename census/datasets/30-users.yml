@@ -1,0 +1,19 @@
+---
+dataset:30-users:
+  type: sql
+  name: 30 users
+  query: |-
+    WITH FIRST_50 AS (
+      SELECT
+          *,
+          TO_DATE(SPLIT_PART(DATE_OF_BIRTH, ' ', 1)) AS DATE_OF_BIRTH_DATE
+      FROM
+          SRC_PRODUCT_DEMO_DATA.USER
+      ORDER BY USER_ID
+      LIMIT 50
+    )
+
+    SELECT * FROM FIRST_50 SAMPLE(30 ROWS)
+  description:
+  icon:
+  connection: data_warehouse:snowflake-iq48949-okay-to-test

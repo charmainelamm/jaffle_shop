@@ -1,0 +1,76 @@
+---
+sync:snowflake-30-users-intercom-connection-user:
+  paused: false
+  behavior:
+    operation: upsert
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: destination:intercom
+    object_identifier: user
+  source:
+    type: dataset
+    connection_identifier: data_warehouse:snowflake-iq48949-okay-to-test
+    object_identifier: dataset:30-users
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: EMAIL
+    to:
+      field_name: email
+    is_primary_identifier: true
+    preserve_values: false
+  - from:
+      type: column
+      data:
+        column_name: COMPANY_ID
+    to:
+      field_name: owner_id
+    preserve_values: false
+  - from:
+      type: column
+      data:
+        column_name: DATE_OF_BIRTH
+    to:
+      field_name: custom_attributes.Birthday
+    preserve_values: false
+  - from:
+      type: column
+      data:
+        column_name: FIRST_NAME
+    to:
+      field_name: name
+    preserve_values: false
+  - from:
+      type: column
+      data:
+        column_name: JOINED_AT
+    to:
+      field_name: signed_up_at
+    preserve_values: false
+  - from:
+      type: column
+      data:
+        column_name: USER_ID
+    to:
+      field_name: external_id
+    preserve_values: false
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75

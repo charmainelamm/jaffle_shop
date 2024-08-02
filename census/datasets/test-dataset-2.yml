@@ -1,0 +1,8 @@
+---
+dataset:test-dataset-2:
+  type: sql
+  name: test dataset 2
+  query: select 1 as id
+  description:
+  icon:
+  connection: data_warehouse:bigquery

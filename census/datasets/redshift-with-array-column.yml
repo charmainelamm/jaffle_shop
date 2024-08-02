@@ -1,0 +1,10 @@
+---
+dataset:redshift-with-array-column:
+  type: sql
+  name: redshift with array column
+  query: |-
+    select 1 as id, array(1) as array_column UNION ALL
+    select 2 as id, array(1, 2) as array_column
+  description:
+  icon: "emoji:\U0001F534"
+  connection: data_warehouse:redshift
