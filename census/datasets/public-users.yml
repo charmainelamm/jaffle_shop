@@ -1,0 +1,8 @@
+---
+dataset:public-users:
+  type: sql
+  name: public users
+  query: select * from public.users
+  description:
+  icon:
+  connection: data_warehouse:redshift
