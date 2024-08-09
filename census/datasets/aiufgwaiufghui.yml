@@ -1,0 +1,8 @@
+---
+dataset:aiufgwaiufghui:
+  type: sql
+  name: aiufgwaiufghui
+  query: Select 1 as id
+  description:
+  icon:
+  connection: data_warehouse:redshift-1
