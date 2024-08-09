@@ -1,0 +1,155 @@
+---
+sync:redshift-users-dataset-googlesheets-connection-sheet1:
+  paused: false
+  behavior:
+    operation: mirror
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: true
+      mode: add_only
+    name_normalization: match_source_names
+    order_by: alphabetical_column_name
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: destination:google-sheets
+    object_identifier: '{"spreadsheet_id":"1Wnn3a4F8WBLpTEEfJN976uX7gJkbK3Na1nn08omVrAk","sheet_id":0}'
+  source:
+    type: dataset
+    connection_identifier: data_warehouse:redshift
+    object_identifier: dataset:users-dataset-3
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: _fivetran_synced
+    to:
+      field_name: _fivetran_synced
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: company
+    to:
+      field_name: company
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: company_domain
+    to:
+      field_name: company_domain
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: created_at
+    to:
+      field_name: created_at
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: email
+    to:
+      field_name: email
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: first_name
+    to:
+      field_name: first_name
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: full_name
+    to:
+      field_name: full_name
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: last_name
+    to:
+      field_name: last_name
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: location
+    to:
+      field_name: location
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: role
+    to:
+      field_name: role
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: type
+    to:
+      field_name: type
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: user_id
+    to:
+      field_name: user_id
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: website
+    to:
+      field_name: website
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  advanced_configuration:
+    input_value_mode: true
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75
+  sync_behavior_family: mapRecords
