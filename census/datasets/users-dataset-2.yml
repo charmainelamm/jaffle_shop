@@ -1,0 +1,8 @@
+---
+dataset:users-dataset-2:
+  type: sql
+  name: users Dataset
+  query: SELECT * FROM users
+  description: Census created dataset for users
+  icon:
+  connection: data_warehouse:redshift
