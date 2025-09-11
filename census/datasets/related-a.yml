@@ -1,0 +1,10 @@
+---
+dataset:related-a:
+  type: sql
+  name: Related A
+  query: |-
+    select 1 as id, 'a' as a, 'b' as b, EXTRACT(EPOCH FROM GETDATE())::BIGINT::VARCHAR as unique_col UNION ALL
+    select 2, 'aa', 'bb', EXTRACT(EPOCH FROM GETDATE())::BIGINT::VARCHAR
+  description: ''
+  icon:
+  connection: connection:aws-redshift-census-demo-warehouse

@@ -1,0 +1,13 @@
+---
+dataset:dataset-for-slack-syncs:
+  type: sql
+  name: dataset for slack syncs
+  query: |-
+    select 1 as id,
+    'a' as a
+    -- ,'b' as b
+    ,'c' as c
+    ,'d' as d
+  description: ''
+  icon:
+  connection: connection:aws-redshift-census-demo-warehouse

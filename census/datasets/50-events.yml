@@ -1,0 +1,58 @@
+---
+dataset:50-events:
+  type: sql
+  name: 50 Events
+  query: |
+    SELECT 1 AS event_id, 1 AS user_id, 'login' AS event_type, DATE '2023-01-01' AS event_time, PARSE_JSON('{"ip":"192.168.1.1"}') AS metadata UNION ALL
+    SELECT 2, 2, 'purchase', DATE '2023-01-03', PARSE_JSON('{"item":"book","price":19.99}') UNION ALL
+    SELECT 3, 3, 'logout', DATE '2023-01-04', PARSE_JSON('{"duration":"5m"}') UNION ALL
+    SELECT 4, 4, 'page_view', DATE '2023-01-05', PARSE_JSON('{"page":"home"}') UNION ALL
+    SELECT 5, 5, 'login', DATE '2023-01-06', PARSE_JSON('{"ip":"192.168.1.2"}') UNION ALL
+    SELECT 6, 6, 'purchase', DATE '2023-01-07', PARSE_JSON('{"item":"laptop","price":899.99}') UNION ALL
+    SELECT 7, 7, 'logout', DATE '2023-01-08', PARSE_JSON('{"duration":"10m"}') UNION ALL
+    SELECT 8, 8, 'page_view', DATE '2023-01-09', PARSE_JSON('{"page":"products"}') UNION ALL
+    SELECT 9, 9, 'login', DATE '2023-01-10', PARSE_JSON('{"ip":"192.168.1.3"}') UNION ALL
+    SELECT 10, 10, 'purchase', DATE '2023-01-11', PARSE_JSON('{"item":"pen","price":2.99}') UNION ALL
+    SELECT 11, 11, 'logout', DATE '2023-01-12', PARSE_JSON('{"duration":"2m"}') UNION ALL
+    SELECT 12, 12, 'page_view', DATE '2023-01-13', PARSE_JSON('{"page":"about"}') UNION ALL
+    SELECT 13, 13, 'login', DATE '2023-01-14', PARSE_JSON('{"ip":"192.168.1.4"}') UNION ALL
+    SELECT 14, 14, 'purchase', DATE '2023-01-15', PARSE_JSON('{"item":"notebook","price":5.49}') UNION ALL
+    SELECT 15, 15, 'logout', DATE '2023-01-16', PARSE_JSON('{"duration":"3m"}') UNION ALL
+    SELECT 16, 16, 'page_view', DATE '2023-01-17', PARSE_JSON('{"page":"contact"}') UNION ALL
+    SELECT 17, 17, 'login', DATE '2023-01-18', PARSE_JSON('{"ip":"192.168.1.5"}') UNION ALL
+    SELECT 18, 18, 'purchase', DATE '2023-01-19', PARSE_JSON('{"item":"keyboard","price":49.99}') UNION ALL
+    SELECT 19, 19, 'logout', DATE '2023-01-20', PARSE_JSON('{"duration":"8m"}') UNION ALL
+    SELECT 20, 20, 'page_view', DATE '2023-01-21', PARSE_JSON('{"page":"faq"}') UNION ALL
+    SELECT 21, 1, 'login', DATE '2023-02-01', PARSE_JSON('{"ip":"10.0.0.1"}') UNION ALL
+    SELECT 22, 2, 'purchase', DATE '2023-02-02', PARSE_JSON('{"item":"mouse","price":25.00}') UNION ALL
+    SELECT 23, 3, 'logout', DATE '2023-02-03', PARSE_JSON('{"duration":"4m"}') UNION ALL
+    SELECT 24, 4, 'page_view', DATE '2023-02-04', PARSE_JSON('{"page":"dashboard"}') UNION ALL
+    SELECT 25, 5, 'login', DATE '2023-02-05', PARSE_JSON('{"ip":"10.0.0.2"}') UNION ALL
+    SELECT 26, 6, 'purchase', DATE '2023-02-06', PARSE_JSON('{"item":"monitor","price":199.99}') UNION ALL
+    SELECT 27, 7, 'logout', DATE '2023-02-07', PARSE_JSON('{"duration":"12m"}') UNION ALL
+    SELECT 28, 8, 'page_view', DATE '2023-02-08', PARSE_JSON('{"page":"home"}') UNION ALL
+    SELECT 29, 9, 'login', DATE '2023-02-09', PARSE_JSON('{"ip":"10.0.0.3"}') UNION ALL
+    SELECT 30, 10, 'purchase', DATE '2023-02-10', PARSE_JSON('{"item":"tablet","price":299.00}') UNION ALL
+    SELECT 31, 11, 'logout', DATE '2023-02-11', PARSE_JSON('{"duration":"1m"}') UNION ALL
+    SELECT 32, 12, 'page_view', DATE '2023-02-12', PARSE_JSON('{"page":"products"}') UNION ALL
+    SELECT 33, 13, 'login', DATE '2023-02-13', PARSE_JSON('{"ip":"10.0.0.4"}') UNION ALL
+    SELECT 34, 14, 'purchase', DATE '2023-02-14', PARSE_JSON('{"item":"phone","price":699.00}') UNION ALL
+    SELECT 35, 15, 'logout', DATE '2023-02-15', PARSE_JSON('{"duration":"6m"}') UNION ALL
+    SELECT 36, 16, 'page_view', DATE '2023-02-16', PARSE_JSON('{"page":"home"}') UNION ALL
+    SELECT 37, 17, 'login', DATE '2023-02-17', PARSE_JSON('{"ip":"10.0.0.5"}') UNION ALL
+    SELECT 38, 18, 'purchase', DATE '2023-02-18', PARSE_JSON('{"item":"headphones","price":89.99}') UNION ALL
+    SELECT 39, 19, 'logout', DATE '2023-02-19', PARSE_JSON('{"duration":"7m"}') UNION ALL
+    SELECT 40, 20, 'page_view', DATE '2023-02-20', PARSE_JSON('{"page":"settings"}') UNION ALL
+    SELECT 41, 1, 'purchase', DATE '2023-03-01', PARSE_JSON('{"item":"desk","price":150.00}') UNION ALL
+    SELECT 42, 2, 'login', DATE '2023-03-02', PARSE_JSON('{"ip":"172.16.0.1"}') UNION ALL
+    SELECT 43, 3, 'page_view', DATE '2023-03-03', PARSE_JSON('{"page":"profile"}') UNION ALL
+    SELECT 44, 4, 'logout', DATE '2023-03-04', PARSE_JSON('{"duration":"9m"}') UNION ALL
+    SELECT 45, 5, 'login', DATE '2023-03-05', PARSE_JSON('{"ip":"172.16.0.2"}') UNION ALL
+    SELECT 46, 6, 'purchase', DATE '2023-03-06', PARSE_JSON('{"item":"chair","price":120.00}') UNION ALL
+    SELECT 47, 7, 'page_view', DATE '2023-03-07', PARSE_JSON('{"page":"cart"}') UNION ALL
+    SELECT 48, 8, 'logout', DATE '2023-03-08', PARSE_JSON('{"duration":"11m"}') UNION ALL
+    SELECT 49, 9, 'login', DATE '2023-03-09', PARSE_JSON('{"ip":"172.16.0.3"}') UNION ALL
+    SELECT 50, 10, 'page_view', DATE '2023-03-10', PARSE_JSON('{"page":"checkout"}')
+  description:
+  icon:
+  connection: connection:snowflake-lw56046-census-azure-dev

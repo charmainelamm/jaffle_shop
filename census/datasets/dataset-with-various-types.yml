@@ -1,0 +1,14 @@
+---
+dataset:dataset-with-various-types:
+  type: sql
+  name: dataset with various types
+  query: |-
+    select 1 as id
+    , 'a' as a
+    , 1233 as int_col
+    , 111.1 as float_col
+    , current_timestamp
+    , EXTRACT(EPOCH FROM CURRENT_TIMESTAMP)+100 AS unix_time
+  description: ''
+  icon:
+  connection: connection:snowflake-iq48949-okay-to-test

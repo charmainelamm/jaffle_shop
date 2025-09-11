@@ -1,8 +1,0 @@
----
-dataset:test-dataset-3:
-  type: sql
-  name: test dataset 3
-  query: select 1 as id
-  description:
-  icon:
-  connection: data_warehouse:redshift

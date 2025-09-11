@@ -1,0 +1,93 @@
+---
+sync:snowflake-dataset-with-various-types-googlesheets-sheet1:
+  paused: false
+  behavior:
+    operation: mirror
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: true
+      mode: add_only
+    name_normalization: match_source_names
+    order_by: alphabetical_column_name
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: connection:google-sheets
+    object_identifier: '{"spreadsheet_id":"1kmtI3TvA1ykvIS73OCN4htyw642_hfAR5o441Ya0LPo","sheet_id":0}'
+  source:
+    type: dataset
+    connection_identifier: connection:snowflake-iq48949-okay-to-test
+    object_identifier: dataset:dataset-with-various-types
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: A
+    to:
+      field_name: BIRTHDATE
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: CURRENT_TIMESTAMP
+    to:
+      field_name: CURRENT_TIMESTAMP
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: FLOAT_COL
+    to:
+      field_name: float
+    field_type: String
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: ID
+    to:
+      field_name: ID
+    field_type: Double
+    follow_source_type: false
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: INT_COL
+    to:
+      field_name: INT_COL
+    field_type: Double
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: UNIX_TIME
+    to:
+      field_name: UNIX_TIME
+    field_type: Double
+    follow_source_type: true
+    generate_field: true
+  advanced_configuration:
+    input_value_mode: true
+    chunked_upload_mode: false
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75
+  sync_behavior_family: mapRecords

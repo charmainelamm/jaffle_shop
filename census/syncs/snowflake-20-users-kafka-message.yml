@@ -1,0 +1,54 @@
+---
+sync:snowflake-20-users-kafka-message:
+  paused: false
+  behavior:
+    operation: append
+    append_properties:
+      backfill_records: true
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: connection:kafka
+    object_identifier: Message
+  source:
+    type: dataset
+    connection_identifier: connection:snowflake-lw56046-census-azure-dev
+    object_identifier: dataset:20-users
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: ID
+    to:
+      field_name: message_id
+    is_primary_identifier: true
+  - from:
+      type: column
+      data:
+        column_name: EMAIL
+    to:
+      field_name: topic
+  advanced_configuration:
+    operation_added: added
+    operation_changed: changed
+    operation_deleted: deleted
+    preserve_ordering: false
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75
+  sync_behavior_family: mapRecords

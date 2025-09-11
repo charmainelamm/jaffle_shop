@@ -1,5 +1,5 @@
 ---
-sync:snowflake-30-users-intercom-connection-user:
+sync:snowflake-20-users-salesforce-account:
   paused: false
   behavior:
     operation: upsert
@@ -13,56 +13,40 @@ sync:snowflake-30-users-intercom-connection-user:
       schedule:
         frequency: never
   destination:
-    connection_identifier: destination:intercom
-    object_identifier: user
+    connection_identifier: connection:brad-developer-salesforce
+    object_identifier: Account
   source:
     type: dataset
-    connection_identifier: data_warehouse:snowflake-iq48949-okay-to-test
-    object_identifier: dataset:30-users
+    connection_identifier: connection:snowflake-lw56046-census-azure-dev
+    object_identifier: dataset:20-users
   mappings:
-  - from:
-      type: column
-      data:
-        column_name: EMAIL
-    to:
-      field_name: email
-    is_primary_identifier: true
-    preserve_values: false
   - from:
       type: column
       data:
         column_name: COMPANY_ID
     to:
-      field_name: owner_id
+      field_name: Id__c
+    is_primary_identifier: true
     preserve_values: false
   - from:
       type: column
       data:
-        column_name: DATE_OF_BIRTH
+        column_name: BIRTHDATE
     to:
-      field_name: custom_attributes.Birthday
+      field_name: ParentId
+      lookup_object:
+        object_identifier: Account
+        field_to_match_by: Id
     preserve_values: false
   - from:
       type: column
       data:
-        column_name: FIRST_NAME
+        column_name: NAME
     to:
-      field_name: name
+      field_name: Name
     preserve_values: false
-  - from:
-      type: column
-      data:
-        column_name: JOINED_AT
-    to:
-      field_name: signed_up_at
-    preserve_values: false
-  - from:
-      type: column
-      data:
-        column_name: USER_ID
-    to:
-      field_name: external_id
-    preserve_values: false
+  advanced_configuration:
+    bulk_id_lookup: true
   operational_settings:
     alerts:
     - type: FailureAlertConfiguration
@@ -74,3 +58,4 @@ sync:snowflake-30-users-intercom-connection-user:
       should_send_recovery: true
       options:
         threshold: 75
+  sync_behavior_family: mapRecords

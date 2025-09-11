@@ -1,0 +1,18 @@
+---
+dataset:10-companies-dup:
+  type: sql
+  name: 10 Companies Dup
+  query: |
+    SELECT 1 AS company_id, 'TechNova' AS name, 'Technology' AS industry, 2010 AS founded, 'San Francisco' AS headquarters UNION ALL
+    SELECT 2, 'GreenLeaf Corp', 'Environmental', 2005, 'Seattle' UNION ALL
+    SELECT 3, 'HealthBridge', 'Healthcare', 2012, 'Boston' UNION ALL
+    SELECT 4, 'FinSuite', 'Finance', 2008, 'New York' UNION ALL
+    SELECT 5, 'EduNation', 'Education', 2015, 'Chicago' UNION ALL
+    SELECT 6, 'RetailPro', 'Retail', 2000, 'Atlanta' UNION ALL
+    SELECT 7, 'FoodCraft', 'Food & Beverage', 2011, 'Austin' UNION ALL
+    SELECT 8, 'SkyLogix', 'Logistics', 2003, 'Denver' UNION ALL
+    SELECT 9, 'MediaPulse', 'Media', 2016, 'Los Angeles' UNION ALL
+    SELECT 10, 'BuildRight', 'Construction', 1998, 'Houston'
+  description:
+  icon:
+  connection: connection:snowflake-lw56046-census-azure-dev

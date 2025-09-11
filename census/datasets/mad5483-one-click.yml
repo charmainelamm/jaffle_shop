@@ -1,0 +1,20 @@
+---
+dataset:mad5483-one-click:
+  type: sql
+  name: MAD5483 one click
+  query: |-
+    select
+    '' as null_field
+    , 2 as id
+    , 'USD' as currency
+    , 'new2@example.com' as email
+    , 'example@example.com' as upper_case_email
+    , 'test.com' as domain
+    , '22251329388' as record_id
+    , CURRENT_TIMESTAMP as timestamp_field
+    , 98033 as zip_code
+    , 'Chicago' as city
+    , 'USA' as country
+  description: ''
+  icon:
+  connection: connection:bigquery-sutrolabs-giza-development

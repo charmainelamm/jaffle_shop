@@ -1,0 +1,69 @@
+---
+sync:redshift-related-a-segment-hubspot-contact:
+  paused: false
+  behavior:
+    operation: upsert
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: connection:census-dev-7162850-1
+    object_identifier: contact
+  source:
+    type: segment
+    connection_identifier: connection:aws-redshift-census-demo-warehouse
+    object_identifier: segment:related-a-segment
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: unique_col
+    to:
+      field_name: email
+    is_primary_identifier: true
+  - from:
+      type: column
+      data:
+        column_name: a
+    to:
+      field_name: address
+  - from:
+      type: column
+      data:
+        column_name: b
+    to:
+      field_name: anton_number
+  - from:
+      type: reference
+      data:
+        object_identifier: dataset:related-a
+        referenced_column_name: 123_col
+        referenced_object_identifier: dataset:related-b
+        relationship_type: to_many
+    to:
+      field_name: multi_checkbox
+    array_field: true
+  - from:
+      type: column
+      data:
+        column_name: id
+    to:
+      field_name: driver_id
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75
+  sync_behavior_family: mapRecords

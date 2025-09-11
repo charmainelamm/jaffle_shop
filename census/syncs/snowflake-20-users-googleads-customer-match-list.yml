@@ -1,0 +1,58 @@
+---
+sync:snowflake-20-users-googleads-customer-match-list:
+  paused: false
+  behavior:
+    operation: mirror
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: connection:google-ads
+    object_identifier: user_data
+  source:
+    type: dataset
+    connection_identifier: connection:snowflake-lw56046-census-azure-dev
+    object_identifier: dataset:20-users
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: ID
+    to:
+      field_name: user_identifier.third_party_user_id
+    is_primary_identifier: true
+  - from:
+      type: column
+      data:
+        column_name: ID
+    to:
+      field_name: user_identifier.mobile_id
+  - from:
+      type: constant
+      data:
+        basic_type: text
+        value: '8440258404'
+    to:
+      field_name: user_list_id
+      lookup_object:
+        object_identifier: user_list
+        field_to_match_by: id
+    array_field: true
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75
+  sync_behavior_family: mapRecords

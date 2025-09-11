@@ -1,0 +1,70 @@
+---
+sync:snowflake-20-users-hubspot-contact:
+  paused: false
+  behavior:
+    operation: upsert
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: connection:census-dev-7162850
+    object_identifier: contact
+  source:
+    type: dataset
+    connection_identifier: connection:snowflake-lw56046-census-azure-dev
+    object_identifier: dataset:20-users
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: ID
+    to:
+      field_name: email
+    is_primary_identifier: true
+  - from:
+      type: column
+      data:
+        column_name: ID
+    to:
+      field_name: association_ids:HUBSPOT_DEFINED:931
+      lookup_object:
+        object_identifier: company
+        field_to_match_by: canvas_created
+    array_field: true
+  - from:
+      type: column
+      data:
+        column_name: ID
+    to:
+      field_name: association_ids:HUBSPOT_DEFINED:279
+      lookup_object:
+        object_identifier: company
+        field_to_match_by: images_deleted
+    array_field: true
+  - from:
+      type: column
+      data:
+        column_name: ID
+    to:
+      field_name: association_ids:HUBSPOT_DEFINED:4
+      lookup_object:
+        object_identifier: deal
+        field_to_match_by: host_id
+    array_field: true
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75

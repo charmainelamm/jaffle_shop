@@ -1,0 +1,56 @@
+---
+sync:snowflake-20-users-slackv2-message-1:
+  paused: false
+  behavior:
+    operation: append
+    append_properties:
+      backfill_records: true
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: connection:slack
+    object_identifier: message
+  source:
+    type: dataset
+    connection_identifier: connection:snowflake-lw56046-census-azure-dev
+    object_identifier: dataset:20-users
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: ID
+    to:
+      field_name: message_id
+    is_primary_identifier: true
+  - from:
+      type: constant
+      data:
+        basic_type: text
+        value: C04SUC185J7
+    to:
+      field_name: channel_id
+      lookup_object:
+        object_identifier: channel
+        field_to_match_by: id
+  advanced_configuration:
+    message_template: '{"blocks":[{"type":"section","text":{"type":"mrkdwn","text":"{{ID}}
+      {{NAME}} {{BIRTHDATE}}"}}]}'
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75
+  sync_behavior_family: mapRecords

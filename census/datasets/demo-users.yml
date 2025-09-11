@@ -1,0 +1,8 @@
+---
+dataset:demo-users:
+  type: sql
+  name: demo users
+  query: SELECT * FROM "demo_data"."users"
+  description: ''
+  icon:
+  connection: connection:aws-redshift-census-demo-warehouse

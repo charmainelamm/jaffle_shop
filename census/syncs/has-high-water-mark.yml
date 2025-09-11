@@ -1,0 +1,61 @@
+---
+sync:has-high-water-mark:
+  paused: false
+  label: account
+  behavior:
+    operation: upsert
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: connection:brad-developer-salesforce
+    object_identifier: Account
+  source:
+    type: table
+    connection_identifier: connection:bigquery-cs-sandbox-347119
+    table_catalog: cs-sandbox-347119
+    table_schema: CS_DB
+    table_name: daily_partition_test_2
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: article_acount
+    to:
+      field_name: Id__c
+    is_primary_identifier: true
+    preserve_values: false
+  - from:
+      type: column
+      data:
+        column_name: article_acount
+    to:
+      field_name: CleanStatus
+    preserve_values: false
+  - from:
+      type: column
+      data:
+        column_name: category
+    to:
+      field_name: Name
+    preserve_values: false
+  advanced_configuration:
+    bulk_id_lookup: true
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75
+  sync_behavior_family: mapRecords

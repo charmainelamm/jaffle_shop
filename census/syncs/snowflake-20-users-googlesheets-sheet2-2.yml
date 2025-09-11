@@ -1,0 +1,102 @@
+---
+sync:snowflake-20-users-googlesheets-sheet2-2:
+  paused: false
+  behavior:
+    operation: mirror
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: true
+      mode: add_only
+    name_normalization: match_source_names
+    order_by: alphabetical_column_name
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: connection:google-sheets
+    object_identifier: '{"spreadsheet_id":"1Wnn3a4F8WBLpTEEfJN976uX7gJkbK3Na1nn08omVrAk","sheet_id":169767845}'
+  source:
+    type: dataset
+    connection_identifier: connection:snowflake-lw56046-census-azure-dev
+    object_identifier: dataset:20-users
+  mappings:
+  - from:
+      type: column
+      data:
+        column_name: BIRTHDATE
+    to:
+      field_name: BIRTHDATE
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: BIRTHDATE
+    to:
+      field_name: aaa
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: COMPANY_ID
+    to:
+      field_name: COMPANY_ID
+    field_type: Double
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: CREATED_AT
+    to:
+      field_name: CREATED_AT
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: EMAIL
+    to:
+      field_name: EMAIL
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: ID
+    to:
+      field_name: ID
+    field_type: Double
+    follow_source_type: true
+    generate_field: true
+  - from:
+      type: column
+      data:
+        column_name: NAME
+    to:
+      field_name: NAME
+    field_type: String
+    follow_source_type: true
+    generate_field: true
+  advanced_configuration:
+    input_value_mode: true
+    chunked_upload_mode: false
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75
+  sync_behavior_family: mapRecords

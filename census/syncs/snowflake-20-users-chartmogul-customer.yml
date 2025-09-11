@@ -1,0 +1,65 @@
+---
+sync:snowflake-20-users-chartmogul-customer:
+  paused: false
+  behavior:
+    operation: upsert
+  mapping_configuration:
+    sync_all_source_columns:
+      enabled: false
+      mode: add_only
+  mode:
+    type: triggered
+    triggers:
+      schedule:
+        frequency: never
+  destination:
+    connection_identifier: connection:chartmogul
+    object_identifier: customer
+  source:
+    type: dataset
+    connection_identifier: connection:snowflake-lw56046-census-azure-dev
+    object_identifier: dataset:20-users
+  mappings:
+  - from:
+      type: compound
+      data:
+        subexpressions:
+        - type: column
+          data:
+            column_name: ID
+        - type: column
+          data:
+            column_name: ID
+    to:
+      field_name: _census_tracking_id
+    is_primary_identifier: true
+  - from:
+      type: column
+      data:
+        column_name: ID
+    to:
+      field_name: external_id
+  - from:
+      type: column
+      data:
+        column_name: ID
+    to:
+      field_name: data_source_uuid
+  - from:
+      type: column
+      data:
+        column_name: NAME
+    to:
+      field_name: name
+  operational_settings:
+    alerts:
+    - type: FailureAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options: {}
+    - type: InvalidRecordPercentAlertConfiguration
+      send_for: first_time
+      should_send_recovery: true
+      options:
+        threshold: 75
+  sync_behavior_family: mapRecords
